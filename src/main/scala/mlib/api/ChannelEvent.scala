@@ -1,12 +1,8 @@
 package mlib.api
 
-import play.api.Play.current
-import play.api.libs.concurrent.Akka._
-import akka.actor.{ActorRef, Props}
-import mlib.impl.{MlibLogger, ConnectionJson, ChannelEventsActor}
-import mlib.impl.ChannelEventsActor.{Event, Subscribe}
+import akka.actor.ActorRef
+import mlib.impl.{MlibLogger, ConnectionJson}
 import scala.concurrent.Future
-import concurrent.ExecutionContext.Implicits.global
 
 /**
  * Channel events public api. Layer between mlib and application.

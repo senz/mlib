@@ -1,4 +1,4 @@
-package mlib.impl
+package test.mlib.impl
 import org.junit._
 import play.api.test._
 import play.api.test.Helpers._

@@ -1,9 +1,10 @@
 package mlib.impl
 
-import mlib.api.{SystemChannels, Message}
+import mlib.api.{Connection, SystemChannels, Message}
 import mlib.api.Message._
 import collection._
 import akka.actor.{ActorRef, ActorLogging, Actor}
+import play.api.libs.json.JsValue
 
 /**
  * Manages channel events and propagates them to actor modules through subscription..

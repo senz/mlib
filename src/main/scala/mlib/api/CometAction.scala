@@ -6,9 +6,8 @@ import play.api.libs.json.{Json, JsValue}
 import mlib.impl.ActionInternals
 import play.api.libs.iteratee.{Enumerator, Input}
 import scala.concurrent.Promise
-import protocol.{ApplicationMessage => Protocol}
-import protocol.FieldValues._
-import protocol.ApplicationMessage.ConnectionEventFormat
+import mlib.impl.protocol.{ApplicationMessage => Protocol}
+import mlib.impl.protocol.FieldValues._
 import play.api.libs.Comet
 
 object CometAction {
@@ -24,7 +23,7 @@ object CometAction {
   def output(callback: String, idGenerator: => Message.ConnectionId) = Action { req =>
     val id = idGenerator
     val (en, _) = ActionInternals.createEnumChannel(id, req.remoteAddress)
-    Ok.stream(Enumerator[JsValue](Json.toJson(Protocol.ConnectionEvent(NEW, id))(ConnectionEventFormat))
+    Ok.stream(Enumerator[JsValue](Json.toJson(Protocol.ConnectionEvent(NEW, id))(Protocol.ConnectionEventFormat))
       >>> en &> Comet(callback = callback))
   }
 

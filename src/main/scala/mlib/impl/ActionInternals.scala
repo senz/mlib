@@ -8,9 +8,8 @@ import scala.Some
 
 import protocol.{ApplicationMessage => Protocol}
 import Protocol._
+import protocol.BasicCode._
 
-import components.{ResultCode => Result}
-import components.ResultCode.ResultCode2Int
 import mlib.api._
 
 protected[mlib] object ActionInternals extends MlibLogger {
@@ -21,13 +20,13 @@ protected[mlib] object ActionInternals extends MlibLogger {
         val message = messageF.asOpt
         if (message.isDefined) ChannelEvent.event(conn, message.get)
         else conn.foreach(_.send(
-          Json.toJson(Protocol.SystemError(Result.PARSE_ERROR, Some(s"could not parse json: ${messageF.toString}")))(SystemErrorFormat)
+          Json.toJson(Protocol.SystemError(PARSE_ERROR, Some(s"could not parse json: ${messageF.toString}")))(SystemErrorFormat)
         ))
       } catch {
         case e: Exception => {
           log.error("exception in iteratee", e)
           conn.foreach(_.send(
-            Json.toJson(Protocol.SystemError(Result.INTERNAL_ERROR, None))(SystemErrorFormat)
+            Json.toJson(Protocol.SystemError(INTERNAL_ERROR, None))(SystemErrorFormat)
           ))
         }
       }
