@@ -37,13 +37,13 @@ protected[mlib] object ActionInternals extends MlibLogger {
     it
   }
 
-  def createEnumChannel(connectionId: Message.ConnectionId, ip: String) = {
+  def createEnumChannel(connectionId: Message.ConnectionId, ip: String)(implicit f: ConnectionFactory) = {
     val chPromise = Promise[Concurrent.Channel[JsValue]]()
     val channel = chPromise.future
     val conPromise = Promise[ConnectionJson]()
 
     channel foreach { channel =>
-      val conn = new ConnectionJson(channel, connectionId, ip)
+      val conn = f.create(channel, connectionId, ip)
       conPromise.success(conn)
       Connections.connected(conn)
     }
@@ -67,3 +67,4 @@ protected[mlib] object ActionInternals extends MlibLogger {
     (en, conPromise.future)
   }
 }
+

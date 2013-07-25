@@ -1,7 +1,6 @@
 package mlib.api
 
 import play.api.libs.iteratee.Concurrent
-import play.api.libs.json.JsValue
 
 /**
  * Shareable entity for async communicating with client.

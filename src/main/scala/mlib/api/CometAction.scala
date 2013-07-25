@@ -20,7 +20,7 @@ object CometAction {
     }
   }
 
-  def output(callback: String, idGenerator: => Message.ConnectionId) = Action { req =>
+  def output(callback: String, idGenerator: => Message.ConnectionId)(implicit f: ConnectionFactory) = Action { req =>
     val id = idGenerator
     val (en, _) = ActionInternals.createEnumChannel(id, req.remoteAddress)
     Ok.stream(Enumerator[JsValue](Json.toJson(Protocol.ConnectionEvent(NEW, id))(Protocol.ConnectionEventFormat))

@@ -5,7 +5,7 @@ import play.api.libs.json.JsValue
 import mlib.impl.ActionInternals
 
 object WebSocketAction {
-  def apply(idGenerator: => Message.ConnectionId) = {
+  def apply(idGenerator: => Message.ConnectionId)(implicit f: ConnectionFactory) = {
     WebSocket.using[JsValue] { req =>
         val (en, conn) = ActionInternals.createEnumChannel(idGenerator, req.remoteAddress)
         val it = ActionInternals.createIt(conn)
