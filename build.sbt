@@ -6,6 +6,10 @@ scalaVersion := "2.10.0"
 
 resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/"
 
+libraryDependencies += "play" %% "play-iteratees" % "2.1.1"
+
+libraryDependencies += "play" %% "play" % "2.1.1"
+
 libraryDependencies += "org.apache.derby" % "derby" % "10.4.1.3"
 
 libraryDependencies += "com.typesafe.akka" % "akka-actor_2.10" % "2.1.4"
