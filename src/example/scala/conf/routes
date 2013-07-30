@@ -1,0 +1,3 @@
+GET     /connect                  controllers.Default.connect()
+GET     /cometInput                  controllers.Default.cometReceive(connectionId: Long, data: String)
+GET     /cometOutput                  controllers.Default.cometSend(callback: String)
