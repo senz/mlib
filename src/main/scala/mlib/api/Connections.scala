@@ -13,7 +13,7 @@ import play.api.Logger
 /**
  * Connection management api. Layer between application's clients and modules.
  */
-object Connections extends MlibLogger {
+object Connections {
   def getConnection(id: Message.ConnectionId): Future[ConnectionJson] = Mlib.system.getConnection(id)
 
   /**

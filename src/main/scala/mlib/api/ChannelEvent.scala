@@ -7,7 +7,7 @@ import scala.concurrent.Future
 /**
  * Channel events public api. Layer between mlib and application.
  */
-object ChannelEvent extends MlibLogger {
+object ChannelEvent {
   /**
    * Subscribe module on channel events.
    * @param channel
