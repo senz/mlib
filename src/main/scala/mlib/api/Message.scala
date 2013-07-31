@@ -1,6 +1,6 @@
 package mlib.api
 
-import play.api.libs.json.JsValue
+import play.api.libs.json.{Json, JsValue}
 import Message._
 
 // TODO make content generic
@@ -15,4 +15,7 @@ object Message {
   type MsgId = String
 
   def unapply(m: Message): Option[(ChannelType, JsValue, MsgId)] = Some(m.channel, m.content, m.msgId)
+
+  implicit def message2JsValue(message: Message): JsValue =
+    Json.obj("channel" -> message.channel, "msgId" -> message.msgId, "content" -> message.content)
 }
