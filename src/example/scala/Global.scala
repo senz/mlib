@@ -1,5 +1,4 @@
-import mlib.impl.ModuleManagerComponentImpl
-import mlib.impl.MlibGlobal
+import mlib.impl.{MlibGlobal, ModuleManagerComponentImpl}
 
 // Mixin ModuleManager to your registry of cakes
 object Registry extends ModuleManagerComponentImpl

@@ -1,13 +1,8 @@
 package mlib.api
 
-import mlib.impl.JsonModuleSystem
-
 object Mlib {
-  private var internalSystem: Option[ModuleSystem] = None
-  def system = if (internalSystem.isEmpty) {
-    internalSystem = Some(new JsonModuleSystem)
-    internalSystem.get
-  } else internalSystem.get
+  private var internalSystem: ModuleSystem = _
+  def system = Option(internalSystem).getOrElse(sys.error("ModuleSystem is not set"))
 
-  def _setSystem(system: ModuleSystem): Unit = internalSystem = Some(system)
+  def _setSystem(system: ModuleSystem): Unit = internalSystem = system
 }

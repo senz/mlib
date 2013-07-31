@@ -1,26 +1,26 @@
 package controllers
-
-import play.api.mvc.Controller
-import java.util.concurrent.atomic.AtomicLong
-import mlib.api._
+import play.api.mvc._
 import play.api.libs.iteratee.Concurrent
 import play.api.libs.json.JsValue
+import mlib.api._
 import mlib.impl.ConnectionJson
+import java.util.concurrent.atomic.AtomicLong
 
-object Default extends Controller {
-  private implicit val connectionFactory = new ConnectionFactory
+object Application extends Controller {
+  private implicit val connectionFactory = new AppConnectionFactory
   private val connectionId = new AtomicLong(0)
 
-  def connect() = WebSocketAction(generateConnectionId())
+  def ws = WebSocketAction(generateConnectionId())
 
   def cometReceive(connectionId: Message.ConnectionId, data: String) = CometAction.input(connectionId, data)
 
   def cometSend(callback: String) = CometAction.output(callback, generateConnectionId())
 
+
   private def generateConnectionId() = connectionId.incrementAndGet()
 }
 
-class ConnectionFactory extends mlib.api.ConnectionFactory {
+class AppConnectionFactory extends mlib.api.ConnectionFactory {
   def create(channel: Concurrent.Channel[JsValue], connectionId: Message.ConnectionId, ip: String) =
     new ConnectionJson(channel, connectionId, ip) // traits with application-specific client state mixed in here (i.e.: auth data)
 }
