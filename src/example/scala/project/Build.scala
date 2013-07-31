@@ -18,7 +18,7 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
   )
 
-  val mlib = Project("mlib", file("app/mlib"), settings = standardSettings)
+  val mlib = Project("mlib", file("app/mlib"), settings = standardSettings ++ PlayProject.intellijCommandSettings("SCALA"))
   val main = play.Project(appName, appVersion, appDependencies, settings = standardSettings)
     .dependsOn(mlib).aggregate(mlib)
 }
