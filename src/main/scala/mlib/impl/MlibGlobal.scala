@@ -9,7 +9,6 @@ trait MlibGlobal extends GlobalSettings {
   val registry: ModuleManagerComponent
 
   override def onStart(app: Application) {
-    super.onStart(app)
     val modules = app.configuration.getStringList("modules")
     implicit val a = app
 
@@ -17,7 +16,6 @@ trait MlibGlobal extends GlobalSettings {
   }
 
   override def onStop(app: Application) {
-    super.onStop(app)
     registry.ModuleManager.list.foreach(registry.ModuleManager.unload)
   }
 

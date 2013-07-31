@@ -33,6 +33,8 @@ class JsonModuleSystem extends ModuleSystem with MlibLogger {
   def connected(connection: ConnectionJson) {
     connActor ! NewConnection(connection)
     log.trace(s"new connection $connection")
+
+
   }
 
   def disconnected(connectionId: Message.ConnectionId) {

@@ -1,5 +1,4 @@
 import mlib.impl.ModuleManagerComponentImpl
-import play.api.{Logger, Application, GlobalSettings}
 import mlib.impl.MlibGlobal
 
 // Mixin ModuleManager to your registry of cakes
