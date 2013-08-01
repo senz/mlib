@@ -6,9 +6,9 @@ import mlib.impl.ActionInternals
 import play.api.libs.iteratee.{Enumerator, Iteratee}
 
 object WebSocketAction {
-  def apply(idGenerator: => Message.ConnectionId)(implicit f: ConnectionFactory) = {
+  def apply(idGenerator: IdGenerator)(implicit f: ConnectionFactory) = {
     WebSocket.using[JsValue] { req =>
-        val (en, conn) = ActionInternals.createEnumChannel(idGenerator, req.remoteAddress)
+        val (en, conn) = ActionInternals.createEnumChannel(idGenerator.generate(req), req.remoteAddress)
         val it = ActionInternals.createIt(conn)
         (it, en)
       }

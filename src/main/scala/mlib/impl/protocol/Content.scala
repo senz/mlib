@@ -1,6 +1,7 @@
 package mlib.impl.protocol
 
 import play.api.libs.json.Json
+import mlib.api.Message
 
 // ACHTUNG!BEWARE!ОСТОРОЖНО!: class fields name will be translated to and from json with format macro
 // so watch for typos
@@ -11,6 +12,6 @@ object Content {
   case class SystemError(code: Int, message: Option[String])
   implicit val SystemErrorFormat = Json.format[SystemError]
 
-  case class ConnectionEvent(event: String, connectionId: Long)
+  case class ConnectionEvent(event: String, connectionId: Message.ConnectionId)
   implicit val ConnectionEventFormat = Json.format[ConnectionEvent]
 }

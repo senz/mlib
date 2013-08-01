@@ -29,7 +29,7 @@ object ApplicationMessage {
     )
   }
 
-  case class ConnectionEvent(event: String, connectionId: Long)
+  case class ConnectionEvent(event: String, connectionId: Message.ConnectionId)
     extends Bridge(Chan.CONNECTION, Json.toJson(Content.ConnectionEvent(event, connectionId)))
   implicit object ConnectionEventFormat extends Writes[ConnectionEvent] {
     def writes(o: ConnectionEvent) = Json.obj(

@@ -11,7 +11,7 @@ trait Message {
 }
 object Message {
   type ChannelType = String
-  type ConnectionId = Long
+  type ConnectionId = String
   type MsgId = String
 
   def unapply(m: Message): Option[(ChannelType, JsValue, MsgId)] = Some(m.channel, m.content, m.msgId)

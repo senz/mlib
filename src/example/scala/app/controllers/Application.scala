@@ -3,21 +3,17 @@ import play.api.mvc._
 import play.api.libs.iteratee.Concurrent
 import play.api.libs.json.JsValue
 import mlib.api._
-import mlib.impl.ConnectionJson
+import mlib.impl.{IdGeneratorIpTimeSalt, ConnectionJson}
 import java.util.concurrent.atomic.AtomicLong
 
 object Application extends Controller {
   private implicit val connectionFactory = new AppConnectionFactory
-  private val connectionId = new AtomicLong(0)
 
-  def ws = WebSocketAction(generateConnectionId())
+  def ws = WebSocketAction(IdGeneratorIpTimeSalt)
 
   def cometReceive(connectionId: Message.ConnectionId, data: String) = CometAction.input(connectionId, data)
 
-  def cometSend(callback: String) = CometAction.output(callback, generateConnectionId())
-
-
-  private def generateConnectionId() = connectionId.incrementAndGet()
+  def cometSend(callback: String) = CometAction.output(callback, IdGeneratorIpTimeSalt)
 }
 
 class AppConnectionFactory extends mlib.api.ConnectionFactory {
