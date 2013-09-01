@@ -10,7 +10,7 @@ libraryDependencies += "play" %% "play-iteratees" % "2.1.1"
 
 libraryDependencies += "play" %% "play" % "2.1.1"
 
-libraryDependencies += "org.apache.derby" % "derby" % "10.4.1.3"
+libraryDependencies += "play" %% "play-test" % "2.1.3"
 
 libraryDependencies += "com.typesafe.akka" % "akka-actor_2.10" % "2.1.4"
 
@@ -19,3 +19,5 @@ libraryDependencies += "com.typesafe.akka" % "akka-testkit_2.10" % "2.1.4"
 libraryDependencies += "org.mockito" % "mockito-all" % "1.9.5"
 
 libraryDependencies += "junit" % "junit" % "4.11"
+
+libraryDependencies += "joda-time" % "joda-time" % "2.3"
