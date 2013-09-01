@@ -1,4 +1,4 @@
-package test.mlib.impl
+package mlib.impl
 import org.junit._
 import play.api.test._
 import play.api.test.Helpers._
@@ -62,7 +62,7 @@ class ModuleSubscribersTest {
     running(app.get) {
       setModule()
       val subscribeEvent = Event(conn.get, Untyped(SystemChannels.SUBSCRIPTION, Json.obj("subscribe" -> chan)))
-      val connId = 1L
+      val connId = "1"
       when(conn.get.id).thenReturn(connId)
       val connectionCloseEvent = Event(conn.get, ConnectionEvent("closed", connId))
 
